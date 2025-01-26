@@ -1,0 +1,32 @@
+1) **Create a DataFrame from List**
+Using pd.DataFrame(): pd.DataFrame(student_data) will allow us to transform our 2D list into a DataFrame.
+We can set custom column names using the columns parameter. First, we create a list of our column names in the order that they will be displayed on the DataFrame.
+Then, we will provide the list as a parameter when we call the pd.DataFrame() function.  
+column_names = ["student_id", "age"]
+pd.DataFrame(student_data, columns=column_names)
+
+2) Get the Size of a DataFrame
+Using the shape attribute: Every DataFrame in pandas has a shape attribute. When you call it, it returns a tuple (number of rows, number of columns). 
+return [players.shape[0], players.shape[1]]
+
+3) Select Data: Write a solution to select the name and age of the student with student_id = 101.
+loc attribute: one of the primary ways to select data from a DataFrame. It is label-based, which means you have to specify the name of the rows or columns to select data. loc is label-based.
+students.loc[students['student_id'] == 101, ['name', 'age']]
+
+4)  Create a New Column
+We can assign these values to a new (or existing) column in the DataFrame. If the column bonus doesn't already exist, pandas will create it.
+When we do employees['bonus'] = employees['salary'] * 2, we're creating a new column called bonus in the DataFrame employees, and populating it with the doubled values of the salary column.
+
+5) Drop Duplicate Rows
+drop_duplicates Function Argument Definition:
+subset: This is the column label or sequence of labels to consider for identifying duplicate rows. If not provided, it considers all columns in the DataFrame.
+keep: This argument determines which duplicate row to retain.
+'first': (default) Drop duplicates except for the first occurrence.
+'last': Drop duplicates except for the last occurrence.
+False: Drop all duplicates.
+inplace: If set to True, the changes are made directly to the object without returning a new object. If set to False (default), a new object with duplicates dropped will be returned.
+customers.drop_duplicates(subset='email', keep='first', inplace=True)
+
+6)Rename Columns
+
+
