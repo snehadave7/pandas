@@ -1,4 +1,4 @@
-1) **Create a DataFrame from List**
+1) Create a DataFrame from List
 Using pd.DataFrame(): pd.DataFrame(student_data) will allow us to transform our 2D list into a DataFrame.
 We can set custom column names using the columns parameter. First, we create a list of our column names in the order that they will be displayed on the DataFrame.
 Then, we will provide the list as a parameter when we call the pd.DataFrame() function.  
@@ -28,5 +28,45 @@ inplace: If set to True, the changes are made directly to the object without ret
 customers.drop_duplicates(subset='email', keep='first', inplace=True)
 
 6)Rename Columns
+rename function: The rename function in pandas is a very useful tool when it comes to renaming column names or index names.
+DataFrame.rename(mapper=None, index=None, columns=None, axis=None, copy=True, inplace=False, level=None, errors='raise')
+Argument Definition:
+mapper, index, columns: The dictionaries you can pass to rename index or columns. In our example, we use columns.
+axis: Can be either "index" or "columns". Determines whether you're renaming the index or the columns. By default, if you provide the columns argument, you're renaming columns.
+copy: If set to True, a new DataFrame is created. If False, the original DataFrame is modified.
+inplace: If set to True, the renaming will modify the DataFrame in place and nothing will be returned. If False, a new DataFrame with renamed columns will be returned without modifying the original DataFrame.
+level: For DataFrames with multi-level index, level from which the labels should be renamed.
+errors: If 'raise', an error is raised if you try to rename an item that doesn't exist. If set to 'ignore', any failure to rename items will be ignored.
+Remember, this function doesn't change the original DataFrame, but instead returns a new DataFrame with renamed columns. If you wish to modify the original DataFrame,
+you can set the inplace argument to True when calling the rename method.
+students = students.rename(
+        columns={
+            "id": "student_id",
+            "first": "first_name",
+            "last": "last_name",
+            "age": "age_in_years",
+        }
+    )
+    return students
 
+7)Change datatype
+astype Function: The astype function is used to cast a pandas object to a specified dtype (data type). astype can be used to cast a pandas object to any dtype. The astype function does not modify 
+the original DataFrame in place. Instead, it returns a new DataFrame with the specified data type changes. If you want to reflect changes in the original DataFrame, you need to reassign the result
+back to it or use the copy parameter accordingly. The function’s syntax is:
+DataFrame.astype(dtype, copy=True, errors='raise')
+Where:
+dtype: It's a data type, or dict of column name -> data type.
+copy: By default, astype always returns a newly allocated object. If copy is set to False, a new object will only be created if the old object cannot be casted to the required type.
+errors: Controls the raising of exceptions on invalid data for the provided dtype. By default, raise is set which means exceptions will be raised.
+So in our case we want to cast the grade column from float to int and we can do so with the following line:
+students = students.astype({'grade': int})
+
+8)Fill missing data
+fillna Function: fillna is a function in the pandas library, used primarily with pandas Series and DataFrame objects. It allows you to fill NA/NaN values using specified methods. 
+In this context, we are using it to replace the None (or NaN in the usual dataframe representation) values.
+products['quantity'].fillna(0, inplace=True)
+Since we are trying to fill missing data from the quantity column of the products DataFrame, we apply the fillna function to products['quantity'].
+Since we want to replace missing values (NaN or None) with 0, we use the value argument as 0.
+Finally, we want to return the original DataFrame, so we set inplace=True to modify the original DataFrame directly without returning a new one.
+Note that if you don't use inplace=True, you would have to capture the result like this: products['quantity'] = products['quantity'].fillna(0)
 
